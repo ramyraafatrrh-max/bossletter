@@ -7,6 +7,7 @@
 <title>Agent Rescue Mission</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -14,16 +15,17 @@
 }
 
 body{
-    font-family: 'Segoe UI', sans-serif;
+    font-family:'Segoe UI',sans-serif;
     background:
-        radial-gradient(circle at top, #1a1a1a, #050505);
+    radial-gradient(circle at top,#161616,#050505);
     color:white;
-    min-height:100vh;
 }
 
 /* LOGIN SCREEN */
+
 #loginScreen{
-    height:100vh;
+    position:fixed;
+    inset:0;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -32,39 +34,35 @@ body{
 
 .login-card{
     width:100%;
-    max-width:420px;
-    background:rgba(15,15,15,.92);
-    border:1px solid #9e0000;
+    max-width:450px;
+    background:#111;
+    border:1px solid #b30000;
     border-radius:18px;
     padding:35px;
     text-align:center;
     box-shadow:
-    0 0 25px rgba(255,0,0,.25),
-    inset 0 0 30px rgba(255,255,255,.03);
+    0 0 25px rgba(255,0,0,.35);
 }
 
 .login-card h1{
     color:#ff4444;
-    margin-bottom:10px;
-    font-size:28px;
+    margin-bottom:15px;
 }
 
 .login-card p{
     color:#ccc;
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
 input{
     width:100%;
     padding:15px;
-    border-radius:10px;
     border:none;
-    outline:none;
-    background:#1e1e1e;
+    border-radius:10px;
+    background:#1d1d1d;
     color:white;
-    text-align:center;
     font-size:20px;
-    letter-spacing:2px;
+    text-align:center;
 }
 
 button{
@@ -73,34 +71,33 @@ button{
     padding:15px;
     border:none;
     border-radius:10px;
-    background:#c20f0f;
+    background:#b80000;
     color:white;
     cursor:pointer;
     font-weight:bold;
-    font-size:16px;
-    transition:.3s;
 }
 
 button:hover{
-    background:#e61818;
+    background:#d60000;
 }
 
 #error{
+    display:none;
     color:#ff6666;
     margin-top:15px;
-    display:none;
 }
 
-/* MISSION PAGE */
+/* CONTENT SCREEN */
+
 #missionPage{
     display:none;
     min-height:100vh;
-    padding:20px;
+    padding:30px 20px;
 }
 
 .header{
     text-align:center;
-    margin-bottom:20px;
+    margin-bottom:25px;
 }
 
 .header h1{
@@ -109,35 +106,33 @@ button:hover{
 }
 
 .header p{
-    color:#bbb;
+    color:#bdbdbd;
 }
 
 .image-container{
     display:flex;
     justify-content:center;
-    align-items:center;
 }
 
-.image-container img{
+#letterImage{
     width:100%;
-    max-width:1000px;
-    border-radius:18px;
+    max-width:1200px;
+    height:auto;
+    border-radius:12px;
     box-shadow:
-        0 0 40px rgba(255,0,0,.3);
+    0 0 40px rgba(255,0,0,.25);
 }
 
 .footer-text{
     text-align:center;
-    margin-top:25px;
-    color:#9c9c9c;
-    font-size:14px;
+    margin-top:20px;
+    color:#999;
 }
+
 </style>
 </head>
 
 <body>
-
-<!-- LOGIN -->
 
 <div id="loginScreen">
 
@@ -150,10 +145,9 @@ button:hover{
         </p>
 
         <input
-            type="password"
             id="passcode"
-            placeholder="Enter Access Code"
-        >
+            type="password"
+            placeholder="Enter Access Code">
 
         <button onclick="checkCode()">
             ACCESS TRANSMISSION
@@ -167,8 +161,6 @@ button:hover{
 
 </div>
 
-<!-- CONTENT -->
-
 <div id="missionPage">
 
     <div class="header">
@@ -177,8 +169,11 @@ button:hover{
     </div>
 
     <div class="image-container">
-        <img src="assets/boss-letter.png" alt="Missionass="footer-text">
-        Agent Rescue Mission - Confidential Intelligence
+
+        <img
+            id="letterImage"
+            src="./assets/boss-letter.png"
+       scue Mission • Confidential Intelligence
     </div>
 
 </div>
@@ -194,29 +189,30 @@ function checkCode(){
 
     if(entered === ACCESS_CODE){
 
-        document.getElementById("loginScreen").style.display = "none";
-        document.getElementById("missionPage").style.display = "block";
+        document.getElementById("loginScreen").style.display="none";
+        document.getElementById("missionPage").style.display="block";
 
-        sessionStorage.setItem("missionUnlocked","true");
+        sessionStorage.setItem(
+            "missionUnlocked",
+            "true"
+        );
 
-    }
-    else{
+    }else{
 
-        document.getElementById("error").style.display = "block";
+        document.getElementById("error").style.display="block";
 
     }
 }
 
-window.onload = () => {
+window.onload = function(){
 
-    if(sessionStorage.getItem("missionUnlocked") === "true"){
+    if(sessionStorage.getItem("missionUnlocked")==="true"){
 
-        document.getElementById("loginScreen").style.display = "none";
-        document.getElementById("missionPage").style.display = "block";
+        document.getElementById("loginScreen").style.display="none";
+        document.getElementById("missionPage").style.display="block";
 
     }
-
-}
+};
 
 </script>
 
